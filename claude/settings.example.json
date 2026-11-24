@@ -1,0 +1,37 @@
+{
+  "permissions": {
+    "deny": [
+      "Bash(gh pr merge *)",
+      "PowerShell(gh pr merge *)",
+      "Bash(gh api *merge*)",
+      "PowerShell(gh api *merge*)",
+      "Bash(git push * main*)",
+      "PowerShell(git push * main*)",
+      "Bash(git push * HEAD:main*)",
+      "PowerShell(git push * HEAD:main*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash|PowerShell",
+        "hooks": [
+          {
+            "type": "command",
+            "if": "Bash(git commit*)",
+            "command": "powershell",
+            "args": ["-NoProfile", "-File", "<workspace>\\engineering-workflow\\claude\\hooks\\ponytail-before-commit.ps1"],
+            "timeout": 15
+          },
+          {
+            "type": "command",
+            "if": "PowerShell(git commit*)",
+            "command": "powershell",
+            "args": ["-NoProfile", "-File", "<workspace>\\engineering-workflow\\claude\\hooks\\ponytail-before-commit.ps1"],
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
