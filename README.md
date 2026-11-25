@@ -23,7 +23,7 @@ flowchart LR
 | Stage | Who | How it is enforced or recorded |
 |---|---|---|
 | Plan and decide | Felipe | Claude presents options with pros and cons and waits for approval (rule 1). |
-| Study pause | Felipe | Before a PR that touches an interview-level concept, Claude names it, what to read and questions to answer (rule 10). The answers are mine (rule 11). |
+| Study pause | Felipe | Before a PR that touches an interview-level concept, Claude names it, what to read and questions to answer (rule 10). The answers are mine, published as written in [`learning/`](learning/) (rule 11). |
 | Execute | Claude Code | Written rules in [`claude/CLAUDE.md`](claude/CLAUDE.md). New behaviour needs a test that is shown to fail when the code is broken on purpose (rule 4). |
 | Local review | Claude Code | `code-review` for bugs, then `ponytail-review` to cut what does not need to exist (rule 9). A [hook](claude/hooks/ponytail-before-commit.ps1) reminds Claude before every commit. |
 | Pull request | Claude Code drafts, Felipe checks | A "Decisions" section separates what I decided, what Claude proposed and I approved, and what came from review (rule 12). |
