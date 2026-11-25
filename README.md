@@ -25,7 +25,7 @@ flowchart LR
 | Plan and decide | Felipe | Claude presents options with pros and cons and waits for approval (rule 1). |
 | Study pause | Felipe | Before a PR that touches an interview-level concept, Claude names it, what to read and questions to answer (rule 10). The answers are mine (rule 11). |
 | Execute | Claude Code | Written rules in [`claude/CLAUDE.md`](claude/CLAUDE.md). New behaviour needs a test that is shown to fail when the code is broken on purpose (rule 4). |
-| Local review | Claude Code | `code-review` for bugs, then `ponytail-review` to cut what does not need to exist (rule 9). A [hook](claude/hooks/ponytail-before-commit.ps1) reminds Claude before every commit. |
+| Local review | Claude Code | The `code-review` skill for bugs, then the `ponytail-review` skill to cut what does not need to exist; the skills themselves, not a review imitating them (rule 9). A [hook](claude/hooks/ponytail-before-commit.ps1) reminds Claude before every commit. |
 | Pull request | Claude Code drafts, Felipe checks | A "Decisions" section separates what I decided, what Claude proposed and I approved, and what came from review (rule 12). |
 | Review on GitHub | `@claude` + Felipe | A GitHub Action ([`github/claude.yml`](github/claude.yml)) reviews the PR against the repo's `CLAUDE.md` when I mention `@claude`. I decide what to apply. |
 | Merge | Felipe only | Claude Code is denied `gh pr merge` and pushes to `main` ([`claude/settings.example.json`](claude/settings.example.json)). |
@@ -50,5 +50,10 @@ PR was open, so its Decisions section was added after the merge and says so.
   only reminds; it does not block a commit.
 - The hook and the permission rules apply to commands Claude runs, not to
   commands I run in my own terminal.
+- The hook cannot tell whether the review skill actually ran. In
+  orbitdesk-api PRs #8 to #10 the over-engineering review was written by
+  hand in the skill's format instead of running the skill; rule 9 now says
+  explicitly that only the skill counts, and each PR names the skills that
+  ran.
 - The `@claude` review job has no database, so it cannot run the test
   suite; test results come from each project's CI.

@@ -9,5 +9,5 @@ $workspace = (Resolve-Path "$PSScriptRoot\..\..\..").Path
 $event = [Console]::In.ReadToEnd() | ConvertFrom-Json
 if (-not ($event.cwd -like "$workspace*")) { exit 0 }
 
-$msg = 'Before this commit (rule 9 of claude/CLAUDE.md): run ponytail-review on the staged diff (git diff --cached), apply the cuts, run the tests again and note in the PR what was cut. If that review was already done on this same diff, go ahead.'
+$msg = 'Before this commit (rule 9 of claude/CLAUDE.md): invoke the ponytail-review skill on the staged diff (git diff --cached); a hand-written review does not count. Apply the cuts, run the tests again and note in the PR what was cut. If the skill already ran on this same diff, go ahead.'
 @{ hookSpecificOutput = @{ hookEventName = 'PreToolUse'; additionalContext = $msg } } | ConvertTo-Json -Compress
