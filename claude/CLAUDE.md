@@ -70,12 +70,15 @@ is implemented and verified.
    PR; Mermaid syntax is checked before committing.
 8. **Commits in English**, `feat:`, `fix:`, `docs:`, `test:`, `ci:`,
    explaining why.
-9. **Two review layers before a PR.** `code-review` on the diff for bugs;
-   then `ponytail-review` to cut what does not need to exist (duplicated
-   code, abstractions with a single use, flexibility nobody uses). Apply the
-   cuts, run the tests again and say in the PR what was cut. A hook
+9. **Two review layers before a PR, both through their skills.** Invoke the
+   `code-review` skill on the diff for bugs; then invoke the
+   `ponytail-review` skill to cut what does not need to exist (duplicated
+   code, abstractions with a single use, flexibility nobody uses). Run the
+   skills themselves: a review written by hand in the same format does not
+   count. Apply the cuts, run the tests again, and in the PR's "From
+   review" name each skill that ran and what it found or cut. A hook
    (`hooks/ponytail-before-commit.ps1`) reminds Claude of this before every
-   `git commit` it runs in the workspace.
+   `git commit` it runs in the workspace; it reminds, it does not check.
 10. **Study pause.** Before coding a PR that touches a concept asked in
     backend interviews (transactions, isolation, authorization in SQL,
     indexes, concurrency, caching, queues, consistency across systems), tell
